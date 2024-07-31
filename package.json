@@ -47,7 +47,7 @@
   "devDependencies": {
     "@craco/craco": "latest",
     "@sentry/cli": "latest",
-    "@types/node": "latest",
+    "@types/node": "^22.0.1",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/styled-components": "latest",

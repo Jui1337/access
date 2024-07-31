@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 
 import {ToggleButtonGroupElement, FormContainer, TextFieldElement} from 'react-hook-form-mui';
+import {regexConfig} from '../../RegexConfig';
 
 import {
   useCreateTag,
@@ -200,7 +201,7 @@ function TagDialog(props: TagDialogProps) {
                   variant="outlined"
                   validation={{
                     maxLength: 255,
-                    pattern: /^[A-Z][A-Za-z0-9\-]*$/,
+                    pattern: regexConfig.namePattern,
                   }}
                   parseError={(error) => {
                     if (error?.message != '') {
@@ -210,7 +211,7 @@ function TagDialog(props: TagDialogProps) {
                       return 'Name can be at most 255 characters in length';
                     }
                     if (error.type == 'pattern') {
-                      return 'Name must start capitalized and contain only alphanumeric characters or hyphens. Regex to match /^[A-Z][A-Za-z0-9-]*$/';
+                      return `Name must start capitalized and contain characters allowed in the regex. ${regexConfig.namePattern}`;
                     }
                     return '';
                   }}

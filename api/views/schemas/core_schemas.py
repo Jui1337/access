@@ -6,6 +6,7 @@ from marshmallow.schema import SchemaMeta, SchemaOpts
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
 from sqlalchemy.orm import Session
 
+from api.config import OKTA_APP_NAME_PATTERN
 from api.extensions import db
 from api.models import (
     AccessRequest,
@@ -245,8 +246,8 @@ class OktaGroupSchema(SQLAlchemyAutoSchema):
         validate=validate.And(
             validate.Length(min=1, max=255),
             validate.Regexp(
-                "^[A-Z][A-Za-z0-9-]*$",
-                error="Group name must start capitalized and contain only alphanumeric characters or hyphens. "
+                f"^{OKTA_APP_NAME_PATTERN}$",
+                error="Group name must start capitalized and contain the characters allowed in the regex below. "
                 "Regex to match: /{regex}/",
             ),
         ),
@@ -837,8 +838,8 @@ class AppGroupSchema(SQLAlchemyAutoSchema):
         validate=validate.And(
             validate.Length(min=1, max=255),
             validate.Regexp(
-                f"^{AppGroup.APP_GROUP_NAME_PREFIX}[A-Z][A-Za-z0-9-]*{AppGroup.APP_NAME_GROUP_NAME_SEPARATOR}[A-Z][A-Za-z0-9-]*$",
-                error="Group name must start capitalized and contain only alphanumeric characters or hyphens. "
+                f"^{AppGroup.APP_GROUP_NAME_PREFIX}{OKTA_APP_NAME_PATTERN}{AppGroup.APP_NAME_GROUP_NAME_SEPARATOR}{OKTA_APP_NAME_PATTERN}$",
+                error="Group name must start capitalized and contain the characters allowed in the regex below. "
                 "Regex to match: /{regex}/",
             ),
         ),
@@ -1129,8 +1130,8 @@ class InitialAppGroupSchema(Schema):
         validate=validate.And(
             validate.Length(min=1, max=255),
             validate.Regexp(
-                f"^{AppGroup.APP_GROUP_NAME_PREFIX}[A-Z][A-Za-z0-9-]*{AppGroup.APP_NAME_GROUP_NAME_SEPARATOR}[A-Z][A-Za-z0-9-]*$",
-                error="Group name must start capitalized and contain only alphanumeric characters or hyphens. "
+                f"^{AppGroup.APP_GROUP_NAME_PREFIX}{OKTA_APP_NAME_PATTERN}{AppGroup.APP_NAME_GROUP_NAME_SEPARATOR}{OKTA_APP_NAME_PATTERN}$",
+                error="Group name must start capitalized and contain the characters allowed in the regex below. "
                 "Regex to match: /{regex}/",
             ),
         ),
@@ -1144,8 +1145,8 @@ class AppSchema(SQLAlchemyAutoSchema):
         validate=validate.And(
             validate.Length(min=1, max=255),
             validate.Regexp(
-                "^[A-Z][A-Za-z0-9-]*$",
-                error="App name must start capitalized and contain only alphanumeric characters or hyphens. "
+                f"^{OKTA_APP_NAME_PATTERN}$",
+                error="App name must start capitalized and contain the characters allowed in the regex below. "
                 "Regex to match: /{regex}/",
             ),
         ),
@@ -1388,8 +1389,8 @@ class TagSchema(SQLAlchemyAutoSchema):
         validate=validate.And(
             validate.Length(min=1, max=255),
             validate.Regexp(
-                "^[A-Z][A-Za-z0-9-]*$",
-                error="Tag name must start capitalized and contain only alphanumeric characters or hyphens. "
+                f"^{OKTA_APP_NAME_PATTERN}$",
+                error="Tag name must start capitalized and contain the characters allowed in the regex below. "
                 "Regex to match: /{regex}/",
             ),
         ),
