@@ -18,7 +18,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import {FormContainer, SelectElement, AutocompleteElement, TextFieldElement} from 'react-hook-form-mui';
-import {regexConfig} from '../../RegexConfig';
+import {regexConfig} from '../../Config';
 
 import {
   useGetApps,

@@ -17,7 +17,7 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 
 import {ToggleButtonGroupElement, FormContainer, TextFieldElement} from 'react-hook-form-mui';
-import {regexConfig} from '../../RegexConfig';
+import {regexConfig} from '../../Config';
 
 import {
   useCreateTag,

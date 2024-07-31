@@ -36,6 +36,9 @@ import {usePutRoleMembersById, PutRoleMembersByIdError, PutRoleMembersByIdVariab
 import {RoleMember, RoleGroupMap, OktaGroup, AppGroup} from '../../api/apiSchemas';
 import {isAccessAdmin} from '../../authorization';
 
+import {AccessTime} from '../../Config';
+import {DEFAULT_ACCESS_TIME} from '../../Config';
+
 interface Data {
   id: number;
   groupName: string | undefined;
@@ -73,23 +76,8 @@ interface CreateRequestForm {
   reason?: string;
 }
 
-const UNTIL_ID_TO_LABELS: Record<string, string> = {
-  '43200': '12 Hours',
-  '432000': '5 Days',
-  '1209600': 'Two Weeks',
-  '2592000': '30 Days',
-  '7776000': '90 Days',
-  indefinite: 'Indefinite',
-  custom: 'Custom',
-} as const;
-
-const UNTIL_JUST_NUMERIC_ID_TO_LABELS: Record<string, string> = {
-  '43200': '12 Hours',
-  '432000': '5 Days',
-  '1209600': 'Two Weeks',
-  '2592000': '30 Days',
-  '7776000': '90 Days',
-} as const;
+const UNTIL_ID_TO_LABELS = AccessTime;
+const UNTIL_JUST_NUMERIC_ID_TO_LABELS = AccessTime;
 
 const UNTIL_OPTIONS = Object.entries(UNTIL_ID_TO_LABELS).map(([id, label], index) => ({id: id, label: label}));
 
@@ -157,7 +145,7 @@ function BulkRenewalDialog(props: BulkRenewalDialogProps) {
   const [labels, setLabels] = React.useState<Array<Record<string, string>>>(UNTIL_OPTIONS);
   const [timeLimit, setTimeLimit] = React.useState<number | null>(null);
   const [requiredReason, setRequiredReason] = React.useState<boolean>(false);
-  const [until, setUntil] = React.useState('1209600');
+  const [until, setUntil] = React.useState(DEFAULT_ACCESS_TIME);
 
   const [paginationModel, setPaginationModel] = React.useState({
     pageSize: 10,

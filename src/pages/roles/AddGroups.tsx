@@ -23,6 +23,8 @@ import DeleteIcon from '@mui/icons-material/Close';
 import CircularProgress from '@mui/material/CircularProgress';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
+import {AccessTime} from '../../Config';
+import {DEFAULT_ACCESS_TIME} from '../../Config';
 
 import {
   FormContainer,
@@ -79,23 +81,8 @@ const GROUP_TYPE_ID_TO_LABELS: Record<string, string> = {
 
 const RFC822_FORMAT = 'ddd, DD MMM YYYY HH:mm:ss ZZ';
 
-const UNTIL_ID_TO_LABELS: Record<string, string> = {
-  '43200': '12 Hours',
-  '432000': '5 Days',
-  '1209600': 'Two Weeks',
-  '2592000': '30 Days',
-  '7776000': '90 Days',
-  indefinite: 'Indefinite',
-  custom: 'Custom',
-} as const;
-
-const UNTIL_JUST_NUMERIC_ID_TO_LABELS: Record<string, string> = {
-  '43200': '12 Hours',
-  '432000': '5 Days',
-  '1209600': 'Two Weeks',
-  '2592000': '30 Days',
-  '7776000': '90 Days',
-} as const;
+const UNTIL_ID_TO_LABELS = AccessTime;
+const UNTIL_JUST_NUMERIC_ID_TO_LABELS = AccessTime;
 
 const UNTIL_OPTIONS = Object.entries(UNTIL_ID_TO_LABELS).map(([id, label], index) => ({id: id, label: label}));
 
@@ -121,7 +108,7 @@ function AddGroupsDialog(props: AddGroupsDialogProps) {
     props.group.active_user_memberships?.map((membership) => membership.active_user!.id).includes(currentUser.id) ??
     false;
 
-  const [until, setUntil] = React.useState('1209600');
+  const [until, setUntil] = React.useState(DEFAULT_ACCESS_TIME);
   const [groupSearchInput, setGroupSearchInput] = React.useState('');
   const [groups, setGroups] = React.useState<Array<OktaGroup | AppGroup>>([]);
   const [requestError, setRequestError] = React.useState('');

@@ -16,7 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 
 import {FormContainer, TextFieldElement} from 'react-hook-form-mui';
-import {regexConfig} from '../../RegexConfig';
+import {regexConfig} from '../../Config';
 
 import {
   useCreateApp,
