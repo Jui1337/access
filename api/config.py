@@ -13,7 +13,7 @@ OKTA_API_TOKEN = os.getenv("OKTA_API_TOKEN")
 OKTA_USE_GROUP_OWNERS_API = os.getenv("OKTA_USE_GROUP_OWNERS_API", "False") == "True"
 CURRENT_OKTA_USER_EMAIL = os.getenv("CURRENT_OKTA_USER_EMAIL", "wumpus@discord.com")
 # if regex not specified by user, default value set by discord access taken
-OKTA_APP_NAME_PATTERN = os.getenv("OKTA_APP_NAME_PATTERN", "^[A-Z][A-Za-z0-9-]*$")
+OKTA_APP_NAME_PATTERN = os.getenv("OKTA_APP_NAME_PATTERN", "[A-Z][A-Za-z0-9-]*")
 
 SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URI")
 SQLALCHEMY_TRACK_MODIFICATIONS = False
